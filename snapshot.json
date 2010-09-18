@@ -1,0 +1,9 @@
+{
+    "snapshots" : [
+	{
+	    "localPath" : "/webcam",
+            "getUrl" : "http://example.com/webcam/out.jpg",  
+	    "saveTemplate" : "/tmp/webcam/{localTime}.jpg"
+	},
+    ]
+}
