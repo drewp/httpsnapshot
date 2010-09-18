@@ -1,21 +1,20 @@
 #!/usr/bin/python
 """
+Released under MIT license. See bottom of file.
+
 Run this with python, or with a wsgi server (the app object is called
 snapshot.application).
 
-when the user posts to /foo, we fetch http://othersite/bar and save it
-to a new file. I will use this to make the 'snapshot' feature of my
-webcam system, but it is not image-specific at all.
+When the user posts to /foo, we fetch http://othersite/bar and save it
+to a new file. We may overwrite previous files if the template makes
+the same name twice. We will make directories as needed. The cookie
+header (so far) will be repeated on the inner request.
+
+I use this to make the 'snapshot' feature of my webcam system, but it
+is not at all specific to images.
 
 The config is a json file of local resource paths, the remote
 resources they get, and the filename templates they write to.
-
-We may overwrite previous files if the template makes the same name
-twice. We will make directories as needed.
-
-Some headers from the POST will be repeated on to the GET call:
-- Cookie
-
 """
 
 import sys, web, restkit, jsonlib, logging, os, datetime, traceback
@@ -114,3 +113,27 @@ application = app.wsgifunc()
 if __name__ == '__main__':
     sys.argv.append("9057") 
     app.run()
+
+"""
+The MIT License
+
+Copyright (c) 2010 Drew Perttula
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+"""
