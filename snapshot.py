@@ -17,7 +17,7 @@ The config is a json file of local resource paths, the remote
 resources they get, and the filename templates they write to.
 """
 
-import sys, web, restkit, jsonlib, logging, os, datetime, traceback
+import sys, web, restkit, json, logging, os, datetime, traceback
 
 log = logging.getLogger()
 
@@ -32,7 +32,7 @@ class Config(object):
         if current > self.mtime:
             self.mtime = current
             log.info("reread %s", self.filename)
-            conf = jsonlib.read(open(self.filename).read())
+            conf = json.loads(open(self.filename).read())
             self.rec = {} # localPath : full record
             for r in conf['snapshots']:
                 self.rec[r['localPath']] = r
